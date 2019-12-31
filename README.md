@@ -22,7 +22,8 @@ ValidateAPICode(code) (bool,string,error)
 ```go
 // What secret should tokens be validated with?
 var secret = "choose something random"
-// Global no password
+
+// Global instance
 var noPwd = NewNoPwd(secret)
 
 func sendCodeToEmail(email string) error {
