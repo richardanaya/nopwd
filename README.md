@@ -33,7 +33,7 @@ e.POST("/login", func(c echo.Context) error {
     return c.String(http.StatusUnauthorized, "Failed to validate code")
   }
   
-  // Once validated, send them whatever authorization token you want them to use 
+  // Once validated, send them whatever authorization token you want them to use for your api
   return c.String(http.StatusOK, "...")
 })
 
