@@ -15,7 +15,10 @@ func TestBasic(t *testing.T) {
 	}
 	parts := strings.Split(link, "=")
 	code := parts[1]
-	valid, err := np.ValidateCode(code)
+	valid, email, err := np.ValidateCode(code)
+	if email != "richard@place.com" {
+		t.Errorf("wrong email")
+	}
 	if err != nil {
 		println(err)
 		t.Errorf("unexpected code validation failure")
@@ -25,7 +28,7 @@ func TestBasic(t *testing.T) {
 	}
 
 	// test fails after expiration
-	valid, err = np.validateCodeAtTime(code, time.Now().Unix()+6000)
+	valid, email, err = np.validateCodeAtTime(code, time.Now().Unix()+6000)
 	if err == nil {
 		t.Errorf("should have failed expiration")
 	}
@@ -34,7 +37,7 @@ func TestBasic(t *testing.T) {
 	}
 
 	// test fails if bad code
-	valid, err = np.validateCodeAtTime(code+"fail", time.Now().Unix())
+	valid, email, err = np.validateCodeAtTime(code+"fail", time.Now().Unix())
 	if err == nil {
 		t.Errorf("should have failed expiration")
 	}
@@ -43,7 +46,10 @@ func TestBasic(t *testing.T) {
 	}
 
 	// test succeeds a little bit of time before expiration
-	valid, err = np.validateCodeAtTime(code, time.Now().Unix()+20)
+	valid, email, err = np.validateCodeAtTime(code, time.Now().Unix()+20)
+	if email != "richard@place.com" {
+		t.Errorf("wrong email")
+	}
 	if err != nil {
 		println(err)
 		t.Errorf("unexpected code validation failure")

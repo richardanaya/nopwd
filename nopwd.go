@@ -47,33 +47,37 @@ func (self NoPwd) generateJWT(email string) (string, error) {
 	return jwtToken, nil
 }
 
-func (self NoPwd) ValidateCode(code string) (bool, error) {
+func (self NoPwd) ValidateCode(code string) (bool, string, error) {
 	return self.validateCodeAtTime(code, time.Now().Unix())
 }
 
-func (self NoPwd) validateCodeAtTime(code string, currenTimeUnix int64) (bool, error) {
+func (self NoPwd) validateCodeAtTime(code string, currenTimeUnix int64) (bool, string, error) {
 	token, err := jwt.Parse(code, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
 		}
 		return []byte(self.secret), nil
 	})
+	if err != nil {
+		return false, "", err
+	}
 
 	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
 		issuer := claims["iss"].(string)
 		expirationTime := int64(claims["exp"].(float64))
 		notBeforeTime := int64(claims["nbf"].(float64))
+		email := claims["email"].(string)
 		if currenTimeUnix > expirationTime {
-			return false, fmt.Errorf("token has expired")
+			return false, "", fmt.Errorf("token has expired")
 		}
 		if currenTimeUnix < notBeforeTime {
-			return false, fmt.Errorf("token used before valid")
+			return false, "", fmt.Errorf("token used before valid")
 		}
 		if issuer != self.url {
-			return false, fmt.Errorf("token is not for this website")
+			return false, "", fmt.Errorf("token is not for this website")
 		}
-		return true, nil
+		return true, email, nil
 	} else {
-		return false, err
+		return false, "", fmt.Errorf("token is not valid")
 	}
 }
