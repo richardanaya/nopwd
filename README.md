@@ -8,7 +8,7 @@ A simple no password library for go for generating login links to send to your u
 
 This library can also generate API codes.
 
-`Note: this library is not enough for production grade login system. Consider more issues rate limitting, blacklisting, asking for a new code before the old one expires.`
+**Note: this library is not enough for production grade login system. Consider more issues rate limitting, blacklisting, asking for a new code before the old one expires.**
 
 ```go
 // What secret should tokens be validated with?
