@@ -7,11 +7,11 @@ A simple no password library for go for generating login links to send to your u
 
 ```go
 // What secret should tokens be validated with?
-secret := "choose something random"
+var secret = "choose something random"
 // How long should login links last?
-ttl := 10 
-
-noPwd := NewNoPwd("https://foo.com",secret,ttl)
+var ttl = 10 
+// Global no password
+var noPwd = NewNoPwd("https://foo.com",secret,ttl)
 
 func sendCodeToEmail(email string) error {
    // create a login link for an email (e.g https://foo.com/?code=ABSDIMOIAd... )
