@@ -15,6 +15,8 @@ func sendCodeToEmail(email string) error {
    // ...
 }
 
+...
+
 e := echo.New()
 e.POST("/send_code", func(c echo.Context) error {
   email := c.QueryParam("email")
@@ -32,4 +34,6 @@ e.POST("/login", func(c echo.Context) error {
   // Once validated, send them whatever authorization token you want them to use 
   return c.String(http.StatusOK, "...")
 })
+
+...
 ````
