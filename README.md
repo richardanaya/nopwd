@@ -4,7 +4,7 @@ A simple no password library for go for generating login links to send to your u
 
 * validated with HMAC256 secret
 * validates the issuer website is the same
-* validates the time the code is validated is not beyond the time to life (TTL) you specify (implying the link could be used multiple times before the TTL expires)
+* validates the code is not validated beyond the time to live (TTL) you specify (implying the link could be used multiple times before the TTL expires)
 
 This library can also generate API codes.
 
