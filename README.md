@@ -11,7 +11,7 @@ This library can also generate API codee, login codes cannot be used as api code
 ## API
 
 ```go
-GenerateLoginLink(email,ttl) (string,error)
+GenerateLoginLink(url, email,ttl) (string,error)
 GenerateLoginCode(email,ttl) (string,error)
 ValidateLoginCode(code) (bool,string,error)
 GenerateAPICode(email,ttl) (string,error)
@@ -24,12 +24,12 @@ ValidateAPICode(code) (bool,string,error)
 // What secret should tokens be validated with?
 var secret = "choose something random"
 // Global no password
-var noPwd = NewNoPwd("https://foo.com",secret)
+var noPwd = NewNoPwd(secret)
 
 func sendCodeToEmail(email string) error {
    // create a login link for an email (e.g https://foo.com/?login_code=ABSDIMOIAd... )
    // that lasts for 10 minutes
-   loginLink := noPwd.GenerateLoginLink(email, 10)
+   loginLink := noPwd.GenerateLoginLink("https://foo.com", email, 10)
    
    // send login link with whatever tech you use for sending emails (mailgun, etc.)
    ...

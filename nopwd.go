@@ -9,23 +9,21 @@ import (
 )
 
 type NoPwd struct {
-	login_url string
-	secret    string
+	secret string
 }
 
-func NewNoPwd(url, secret string) NoPwd {
+func NewNoPwd(secret string) NoPwd {
 	return NoPwd{
-		login_url: url,
-		secret:    secret,
+		secret: secret,
 	}
 }
 
-func (self NoPwd) GenerateLoginLink(email string, ttl int64) (string, error) {
+func (self NoPwd) GenerateLoginLink(url, email string, ttl int64) (string, error) {
 	code, err := self.GenerateLoginCode(email, ttl)
 	if err != nil {
 		return "", err
 	}
-	return self.login_url + "?login_code=" + code, nil
+	return url + "?login_code=" + code, nil
 }
 
 func (self NoPwd) GenerateLoginCode(email string, ttl int64) (string, error) {
@@ -51,7 +49,6 @@ func (self NoPwd) generateJWT(email, code_type string, ttl int64) (string, error
 		"iat":       time.Now().Unix(),
 		"nbf":       time.Now().Unix(),
 		"exp":       time.Now().Unix() + (ttl * 60),
-		"iss":       self.login_url,
 		"code_type": code_type,
 	})
 	jwtToken, err := token.SignedString([]byte(self.secret))
@@ -82,7 +79,6 @@ func (self NoPwd) validateCodeAtTime(code, codeType string, currenTimeUnix int64
 	}
 
 	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
-		issuer := claims["iss"].(string)
 		expirationTime := int64(claims["exp"].(float64))
 		notBeforeTime := int64(claims["nbf"].(float64))
 		email := claims["email"].(string)
@@ -97,9 +93,6 @@ func (self NoPwd) validateCodeAtTime(code, codeType string, currenTimeUnix int64
 		}
 		if currenTimeUnix < notBeforeTime {
 			return false, "", fmt.Errorf("token used before valid")
-		}
-		if issuer != self.login_url {
-			return false, "", fmt.Errorf("token is not for this website")
 		}
 		return true, email, nil
 	} else {
