@@ -21,11 +21,19 @@ func NewNoPwd(url, secret string) NoPwd {
 }
 
 func (self NoPwd) GenerateLoginLink(email string, ttl int64) (string, error) {
-	code, err := self.generateJWT(email, "login", ttl)
+	code, err := self.GenerateLoginCode(email, ttl)
 	if err != nil {
 		return "", err
 	}
 	return self.login_url + "?login_code=" + code, nil
+}
+
+func (self NoPwd) GenerateLoginCode(email string, ttl int64) (string, error) {
+	code, err := self.generateJWT(email, "login", ttl)
+	if err != nil {
+		return "", err
+	}
+	return code, nil
 }
 
 func (self NoPwd) GenerateAPICode(email string, ttl int64) (string, error) {
