@@ -28,7 +28,7 @@ var noPwd = NewNoPwd(secret)
 func sendCodeToEmail(email string) error {
    // create a login link for an email (e.g https://foo.com/?login_code=ABSDIMOIAd... )
    // that lasts for 10 minutes
-   loginLink := noPwd.GenerateLoginLink("https://foo.com", email, 10)
+   loginLink := noPwd.GenerateLoginLink("https://foo.com/?login_code=", email, 10)
    
    // send login link with whatever tech you use for sending emails (mailgun, etc.)
    ...

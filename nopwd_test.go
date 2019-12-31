@@ -8,7 +8,7 @@ import (
 
 func TestBasic(t *testing.T) {
 	np := NewNoPwd("abracadabra")
-	link, err := np.GenerateLoginLink("test.com", "richard@place.com", 10)
+	link, err := np.GenerateLoginLink("test.com/login_code=", "richard@place.com", 10)
 	if err != nil {
 		println(err)
 		t.Errorf("error generating login code")

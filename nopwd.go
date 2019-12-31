@@ -23,7 +23,7 @@ func (self NoPwd) GenerateLoginLink(url, email string, ttl int64) (string, error
 	if err != nil {
 		return "", err
 	}
-	return url + "?login_code=" + code, nil
+	return url + code, nil
 }
 
 func (self NoPwd) GenerateLoginCode(email string, ttl int64) (string, error) {
