@@ -7,8 +7,8 @@ import (
 )
 
 func TestBasic(t *testing.T) {
-	np := NewNoPwd("test.com", "abracadabra", 10)
-	link, err := np.GenerateLoginLink("richard@place.com")
+	np := NewNoPwd("test.com", "abracadabra")
+	link, err := np.GenerateLoginLink("richard@place.com", 10)
 	if err != nil {
 		println(err)
 		t.Errorf("error generating login code")
@@ -64,7 +64,7 @@ func TestBasic(t *testing.T) {
 		t.Errorf("code not valid")
 	}
 
-	apiCode, err := np.GenerateAPICode("richard@place.com")
+	apiCode, err := np.GenerateAPICode("richard@place.com", 10)
 	if err != nil {
 		println(err)
 		t.Errorf("error generating api code")

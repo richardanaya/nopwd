@@ -11,27 +11,25 @@ import (
 type NoPwd struct {
 	login_url string
 	secret    string
-	login_ttl int64
 }
 
-func NewNoPwd(url, secret string, ttl int64) NoPwd {
+func NewNoPwd(url, secret string) NoPwd {
 	return NoPwd{
 		login_url: url,
 		secret:    secret,
-		login_ttl: ttl,
 	}
 }
 
-func (self NoPwd) GenerateLoginLink(email string) (string, error) {
-	code, err := self.generateJWT(email, "login", self.login_ttl)
+func (self NoPwd) GenerateLoginLink(email string, ttl int64) (string, error) {
+	code, err := self.generateJWT(email, "login", ttl)
 	if err != nil {
 		return "", err
 	}
 	return self.login_url + "?login_code=" + code, nil
 }
 
-func (self NoPwd) GenerateAPICode(email string) (string, error) {
-	code, err := self.generateJWT(email, "api", self.login_ttl)
+func (self NoPwd) GenerateAPICode(email string, ttl int64) (string, error) {
+	code, err := self.generateJWT(email, "api", ttl)
 	if err != nil {
 		return "", err
 	}
