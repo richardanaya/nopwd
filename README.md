@@ -10,6 +10,8 @@ This library can also generate API codee, login codes cannot be used as api code
 ## API
 
 ```go
+import "https://github.com/richardanaya/nopwd"
+
 GenerateLoginLink(url, email,ttl) (string,error)
 GenerateLoginCode(email,ttl) (string,error)
 ValidateLoginCode(code) (bool,string,error)
