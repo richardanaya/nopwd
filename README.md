@@ -14,7 +14,7 @@ func sendCodeToEmail(email string) error {
    // create a login link for an email (e.g https://foo.com/?code=ABSDIMOIAd... )
    loginLink := noPwd.GenerateCodeLink(email)
    
-   // send an login with whatever tech you use for sending emails (mailgun, etc.)
+   // send login link with whatever tech you use for sending emails (mailgun, etc.)
    ...
 }
 
