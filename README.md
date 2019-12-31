@@ -3,7 +3,7 @@
 A simple no password library for go for doing no password style login. This library only concerns itself with logging in. Not validation of APIs after you are logged in.
 
 ```go
-// What secret should secrets validate with?
+// What secret should tokens be validated with?
 secret := "choose something random"
 // How long should login links last?
 ttl := 10 
