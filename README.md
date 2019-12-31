@@ -10,11 +10,13 @@ This library can also generate API codee, login codes cannot be used as api code
 
 ## API
 
-* `GenerateLoginLink(email,ttl) (string,error)`
-* `GenerateLoginCode(email,ttl) (string,error)`
-* `ValidateLoginCode(code) (bool,string,error)`
-* `GenerateAPICode(email,ttl) (string,error)`
-* `ValidateAPICode(code) (bool,string,error)`
+```go
+GenerateLoginLink(email,ttl) (string,error)
+GenerateLoginCode(email,ttl) (string,error)
+ValidateLoginCode(code) (bool,string,error)
+GenerateAPICode(email,ttl) (string,error)
+ValidateAPICode(code) (bool,string,error)
+```
 
 **Note: this library is not enough for production grade login system, but it might be good for experiments. Consider more issues such as rate limitting, blacklisting, asking for a new code before the old one expires. If you are in doubt, look at the source of this project. It's very minimal.**
 
