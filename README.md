@@ -32,7 +32,7 @@ e.POST("/send_code", func(c echo.Context) error {
 
 e.POST("/login", func(c echo.Context) error {
   code := c.QueryParam("code")
-  valid, err := noPwd.ValidateCode(code)
+  valid, email, err := noPwd.ValidateCode(code)
   if valid != true || err != nil {
     return c.String(http.StatusUnauthorized, "Failed to validate code")
   }
