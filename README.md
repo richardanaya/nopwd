@@ -12,7 +12,9 @@ noPwd := NewNoPwd("test.com",secret,ttl)
 
 func sendCodeToEmail(email string) error {
    loginLink := noPwd.GenerateCodeLink(email)
-   // ...
+   
+   // send an login with whatever tech you use for sending emails (mailgun, etc.)
+   ...
 }
 
 ...
