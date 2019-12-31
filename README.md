@@ -18,7 +18,7 @@ GenerateAPICode(email,ttl) (string,error)
 ValidateAPICode(code) (bool,string,error)
 ```
 
-**Note: this library is not enough for production grade login system, but it might be good for experiments. Consider more issues such as rate limitting, blacklisting, asking for a new code before the old one expires. If you are in doubt, look at the source of this project. It's very minimal.**
+**Note: this library is not enough for production grade login system, but it might be good for experiments. Consider more issues such as rate limitting, blacklisting, invalidation, asking for a new code before the old one expires. If you are in doubt, look at the source of this project. It's very minimal.**
 
 ```go
 // What secret should tokens be validated with?
