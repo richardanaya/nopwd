@@ -3,7 +3,6 @@
 A simple no password library for go for generating login links to send to your user with a login code that can obtain an api code. Codes are:
 
 * validated with HMAC256 secret
-* validates the issuer website is the same
 * validates the code is not validated beyond the time to live (TTL) you specify (implying the link could be used multiple times before the TTL expires)
 
 This library can also generate API codee, login codes cannot be used as api codes as well as api codes cannot be used as login.
