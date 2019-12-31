@@ -1,6 +1,9 @@
 # nopwd
 
-A simple no password library for go for doing no password style login. This library only concerns itself with logging in. Not validation of APIs after you are logged in.
+A simple no password library for go for doing no password style login. This library only concerns itself with logging in. Not validation of APIs after you are logged in.  This library generates a link to your website that contains a code in the URL that is:
+* validatable with HMAC256
+* validates the issuer is the same
+* validates the time the code is validated is not beyond the time to life (TTL) you specify
 
 ```go
 // What secret should tokens be validated with?
