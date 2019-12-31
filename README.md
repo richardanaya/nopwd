@@ -6,9 +6,9 @@ A simple no password library for go for generating login links to send to your u
 * validates the issuer website is the same
 * validates the code is not validated beyond the time to live (TTL) you specify (implying the link could be used multiple times before the TTL expires)
 
-This library can also generate API codes.
+This library can also generate API codee, login codes cannot be used as api codes as well as api codes cannot be used as login.
 
-**Note: this library is not enough for production grade login system, but it might be good for experiments. Consider more issues such as rate limitting, blacklisting, asking for a new code before the old one expires.**
+**Note: this library is not enough for production grade login system, but it might be good for experiments. Consider more issues such as rate limitting, blacklisting, asking for a new code before the old one expires. If you are in doube, look at the source of this project. It's very minimal.**
 
 ```go
 // What secret should tokens be validated with?
