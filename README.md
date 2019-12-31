@@ -32,7 +32,7 @@ e.POST("/send_code", func(c echo.Context) error {
 
 e.POST("/login", func(c echo.Context) error {
   code := c.QueryParam("login_code")
-  valid, email, err := noPwd.ValidateCode(code)
+  valid, email, err := noPwd.ValidateLoginCode(code)
   if valid != true || err != nil {
     return c.String(http.StatusUnauthorized, "Failed to validate code")
   }
@@ -47,5 +47,15 @@ e.POST("/login", func(c echo.Context) error {
   }`))
 })
 
+
+e.POST("/some_api", func(c echo.Context) error {
+  code := c.Request().Headers.Get("MyAuthHeader")
+  valid, email, err := noPwd.ValidateAPICode(code)
+  if valid != true || err != nil {
+    return c.String(http.StatusUnauthorized, "Failed to validate code")
+  }
+  
+  // do something
+})
 ...
 ````
