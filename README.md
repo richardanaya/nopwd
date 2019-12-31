@@ -1,8 +1,8 @@
 # nopwd
 
-A simple no password library for go for generating login links to send to your user. This library only concerns itself with logging in. Not validation of APIs after you are logged in.  This library generates a link to your website that contains a code in the URL that is:
+A simple no password library for go for generating login links to send to your user with a login code that can obtain an api code. Codes are:
 
-* validatable with HMAC256 secret
+* validated with HMAC256 secret
 * validates the issuer website is the same
 * validates the time the code is validated is not beyond the time to life (TTL) you specify (implying the link could be used multiple times before the TTL expires)
 
